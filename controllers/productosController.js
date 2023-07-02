@@ -47,7 +47,7 @@ export const subirArchivo = (req, res, next) => {
 export const nuevoProducto = async (req, res, next) => {
     try {
         const producto = new Productos(req.body);
-
+        
         if (req.file.filename) {
             producto.imagen = req.file.filename
         }

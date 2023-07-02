@@ -20,7 +20,9 @@ import {
 import {
     mostrarPedido,
     mostrarPedidos,
-    nuevoPedido
+    nuevoPedido,
+    actualizarPedido, 
+    eliminarPedido
 } from '../controllers/pedidosController.js';
 const router = Router();
 
@@ -62,14 +64,19 @@ router.delete('/productos/:idProducto', eliminarProducto);
 
 /* PEDIDOS */
 
-//Agregar nuevos pedidos
+// Agregar nuevos pedidos
 router.post('/pedidos', nuevoPedido);
 
-//mostrar pedidos
+// Mostrar pedidos
 router.get('/pedidos', mostrarPedidos);
 
-//Obtener Pedido expecificamente (ID)
+// Obtener Pedido expecificamente (ID)
 router.get('/pedidos/:idPedido', mostrarPedido);
 
+// Actualizar pedido en especifico
+router.put('/pedidos/:idPedido', actualizarPedido)
+
+// Eliminar pedidos
+router.delete('/pedidos/:idPedido', eliminarPedido);
 
 export default router;

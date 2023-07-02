@@ -61,3 +61,53 @@ export const mostrarPedido = async (req, res, next) => {
         next();
     }
 };
+
+export const actualizarPedido = async (req, res, next) => {
+    try {
+
+        const { idPedido } = req.params;
+
+        let pedido = await Pedidos.findOneAndUpdate({
+            _id: idPedido,
+        }, req.body, {
+            new: true,
+        })
+        .populate('cliente')
+        .populate({
+            path: 'pedido.producto',
+            model: 'Productos',
+        });;
+
+        console.log(pedido);
+
+        res.status(201).json({
+            status: 201,
+            data: pedido,
+        })
+
+    } catch(err){
+        console.log();
+        next()
+    }
+};
+
+export const eliminarPedido = async (req, res, next) => {
+    try {
+
+        const { idPedido } = req.params;
+
+        await Pedidos.findOneAndDelete({
+            _id: idPedido,
+        });
+
+        res.status(200)
+        .json({
+            status: 200,
+            message: "Pedido Eliminado",
+        });
+
+    } catch(err) {
+        console.log(err);
+        next();
+    }    
+}
